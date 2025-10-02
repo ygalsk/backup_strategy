@@ -60,9 +60,16 @@ sudo chown $USER:$USER /opt/alles/log
 
 ### Option A: Without sudo (Recommended)
 
-Set permissions:
+Add your user to the docker group and set permissions:
 ```bash
-sudo chown -R $USER:$USER /opt/alles/soda4lca
+sudo usermod -aG docker $USER
+sudo chgrp -R docker /opt/alles/soda4lca
+sudo chmod -R g+rX /opt/alles/soda4lca
+```
+
+Log out and back in, then verify:
+```bash
+groups  # Should show 'docker'
 ```
 
 Run backup:
